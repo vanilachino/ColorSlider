@@ -21,6 +21,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        updateLabel(for: redSlider)
+        updateLabel(for: greenSlider)
+        updateLabel(for: blueSlider)
+    
         backgroundView.layer.cornerRadius = 15
     }
 
@@ -29,7 +34,23 @@ class ViewController: UIViewController {
         let greenValue = CGFloat(greenSlider.value)
         let blueValue = CGFloat(blueSlider.value)
         backgroundView.backgroundColor = UIColor(red: redValue, green: greenValue, blue: blueValue, alpha: 1)
+        
+        updateLabel(for: sender)
     }
     
+    private func updateLabel(for slider: UISlider) {
+        
+        var labelForUpdate: UILabel
+        
+        switch slider.tag {
+        case 1:
+            labelForUpdate = greenLabel
+        case 2:
+            labelForUpdate = blueLabel
+        default:
+            labelForUpdate = redLabel
+        }
+        
+        labelForUpdate.text = String(format: "%.2f", slider.value)
+    }
 }
-
